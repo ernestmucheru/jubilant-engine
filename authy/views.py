@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
 def registerPage(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return redirect('home')
     else:
         form = CreateUserForm()
@@ -21,7 +21,7 @@ def registerPage(request):
         context = {'form':form}
         return render(request,'accounts/register.html', context)
 def loginPage(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return redirect('home')
     else:
         if request.method == 'POST':
