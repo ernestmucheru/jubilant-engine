@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authy',
 ]
-
+SECRET_KEY = '123456789'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
