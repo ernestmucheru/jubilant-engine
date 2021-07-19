@@ -1,6 +1,5 @@
 <div class="container my-5">
 
-
     <!-- Section: Block Content -->
     <section class="dark-grey-text text-center">
   
@@ -14,7 +13,8 @@
         <div class="col-md-6 mb-4">
   
           <div class="view overlay rounded z-depth-1">
-            <img src="https://mdbootstrap.com/img/Photos/Others/laptop-sm.jpg" class="img-fluid" alt="Sample project image">
+            {% for project in projects %}
+            <img src="{{project.image.url}}" class="img-fluid" alt="{{img.alt}}">
             <a>
               <div class="mask rgba-white-slight"></div>
             </a>
@@ -28,12 +28,12 @@
             <p class="text-muted">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, adipisci velit cupidatat proident voluptatem quia numquam.</p>
             <a class="btn btn-success btn-rounded btn-md"> View more</a>
           </div>
-  
+          {% endfor %}
         </div>
         <!-- Grid column -->
   
         <!-- Grid column -->
-        <div class="col-md-6 mb-4">
+        <!-- <div class="col-md-6 mb-4">
   
           <div class="view overlay rounded z-depth-1">
             <img src="https://mdbootstrap.com/img/Photos/Others/images/19.jpg" class="img-fluid" alt="Sample project image">
@@ -51,7 +51,7 @@
             <a class="btn btn-success btn-rounded btn-md"> View more</a>
           </div>
   
-        </div>
+        </div> -->
         <!-- Grid column -->
   
       </div>
