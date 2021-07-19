@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authy',
+    'homepage',
 ]
 SECRET_KEY = '123456789'
 
