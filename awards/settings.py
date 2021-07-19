@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authy',
     'homepage',
+    
 ]
 SECRET_KEY = '123456789'
 
