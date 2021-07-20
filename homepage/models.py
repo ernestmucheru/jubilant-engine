@@ -15,7 +15,7 @@ class Projects(models.Model):
     image = models.ImageField(upload_to="",null=False, blank=False)
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-
+    link = models.CharField(max_length=400, null=True, blank=True)
     def __str__(self):
         return self.alt
 
