@@ -12,7 +12,7 @@ class Projects(models.Model):
     alt = models.CharField(max_length=60)
     title = models.CharField(max_length=100, null=True)
     image = models.ImageField(upload_to="")
-    description = models.CharField(max_length=300)
+    description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):

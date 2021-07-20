@@ -1,49 +1,53 @@
 <div class="container my-5">
 
-    <!-- Section: Block Content -->
-    <section class="dark-grey-text text-center">
-  
-      <h3 class="font-weight-bold mb-4 pb-2">Our best projects</h3>
-      <p class="text-muted w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur veniam.</p>
-  
-      <!-- Grid row -->
-      <div class="row">
-        {% for project in projects %}
-        
-        <!-- Grid column -->
-        <div class="col-md-6 mb-4">
-          
-          <div class="view overlay rounded z-depth-1">
-            
-            <img  style="min-width: 550px;
-                         max-width: 550px;
-                         min-height: 350px;
-                         max-height: 350px;
-              "src="{{project.image.url}}" class="img-fluid" alt="{{img.alt}}">
-            <a>
-              <div class="mask rgba-white-slight"></div>
+  <!-- Section: Block Content -->
+  <section class="dark-grey-text text-center">
+
+    <h3 class="font-weight-bold mb-4 pb-2">Our best projects</h3>
+    <p class="text-muted w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit,
+      error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum porro a
+      pariatur veniam.</p>
+
+    <!-- Grid row -->
+    <div class="row">
+      {% for project in projects %}
+
+      <!-- Grid column -->
+      <div class="col-md-6 mb-4">
+        <div class="view overlay rounded z-depth-1">
+            <a href="{% url 'project' 2 %}">
+              <img style="min-width: 550px;
+              max-width: 550px;
+              min-height: 350px;
+              max-height: 350px;
+              " src="{{project.image.url}}" class="img-fluid" alt="{{img.alt}}">
             </a>
-          </div>
-  
-          <div class="px-3 pt-3 mx-1 mt-1 pb-0">
-            <a class="orange-text">
-              <h6 class="font-weight-bold mt-2 mb-3"><i class="fas fa-chart-line pr-2"></i>{{project.alt}}</h6>
-            </a>
-            <h4 class="font-weight-bold mb-3">{{project.title}}</h4>
-            <p class="text-muted">{{project.description}}</p>
-            <a class="btn btn-success btn-rounded btn-md"> View more</a>
-            
-          </div>
-         
-         
+          <div class="mask rgba-white-slight"></div>
         </div>
-      
-        {% endfor %}
+
+        <div class="px-3 pt-3 mx-1 mt-1 pb-0">
+          <a class="orange-text">
+            <h6 class="font-weight-bold mt-2 mb-3"><i class="fas fa-chart-line pr-2"></i>{{project.alt}}</h6>
+          </a>
+          <h4 class="font-weight-bold mb-3">{{project.title}}</h4>
+          <p class="text-muted">{{project.description}}</p>
+          <a  href="{% url 'project' 2 %}"class="btn btn-success btn-rounded btn-md"> View more</a>
+
+        </div>
+
+
       </div>
-      <!-- Grid row -->
-  
-    </section>
-    <!-- Section: Block Content -->
-  
-  
-  </div>
+
+      {% endfor %}
+      <br>
+      <br><br>
+    </div>
+
+    <!-- Grid row -->
+
+  </section>
+
+  <!-- Section: Block Content -->
+
+
+</div>
