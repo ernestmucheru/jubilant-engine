@@ -20,6 +20,13 @@
                             href="{% url 'profile' %}">Profile</a></li>
             </ul>
         </div>
+
+        <form class="form-inline">
+            <div class="md-form my-0">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+            <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
+        </form>
             </div>
             <div >
 
@@ -28,7 +35,7 @@
                 <section class="text-center white-text ">
     <!--           
                   <h3 class="font-weight-bold mb-md-0 mb-4 mt-2 pt-1">Lorem ipsum dolor sit amet.</h3> -->
-                  <li><a href="{% url 'upload'%}"><button type="button" class="btn btn-white btn-rounded"  >Upload </button></a></li>
+                  <a href="{% url 'upload'%}"><button type="button" class="btn btn-white btn-rounded"  >Upload </button></a>
                   
               
                 </section>

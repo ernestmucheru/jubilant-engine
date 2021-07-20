@@ -1,6 +1,16 @@
 from pathlib import Path
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
+
+# adding config
+cloudinary.config( 
+  cloud_name = "nyumbani254", 
+  api_key = "211979551313292", 
+  api_secret = "0FG4ejHHRipGKzFQ-re7xp7h5UM" 
+)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,6 +41,7 @@ INSTALLED_APPS = [
     'star_ratings',
     'bootstrap3',
     'crispy_forms',
+    'cloudinary',
 
     
 ]

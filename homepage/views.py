@@ -4,6 +4,7 @@ from .models import Projects, Ratings, Category
 from.forms import RatingForm
 
 
+
 # Create your views here.
 @login_required(login_url='login')
 def index(request):
