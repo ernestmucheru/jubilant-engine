@@ -40,3 +40,7 @@ def loginPage(request):
 
 def logoutUser(request):
     return redirect('login')
+
+def profile(request):
+
+    return render(request, 'profile.html')

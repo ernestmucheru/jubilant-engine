@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('authy.urls')),
     path('', include('homepage.urls')),
+    path('ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
 ]
