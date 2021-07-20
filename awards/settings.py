@@ -32,6 +32,8 @@ INSTALLED_APPS = [
 
     
 ]
+
+
 SECRET_KEY = '123456789'
 
 MIDDLEWARE = [
