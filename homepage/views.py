@@ -12,9 +12,14 @@ def index(request):
 
 
     return render(request, 'index.html',context)
+
 def about(request):
 
     return render(request, 'about.html')
+
+def upload(request):
+
+    return render(request, 'upload.html')
 
 def viewProject(request, id):
     project = Projects.objects.get(id=id)

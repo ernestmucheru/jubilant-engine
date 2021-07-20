@@ -8,7 +8,7 @@ urlpatterns = [
     path('about', views.about, name='about'),
     path('contact', views.contact, name='contact'),
     path('project/<int:id>/', views.viewProject, name='project'),
-
+    path('upload', views.upload, name='upload'),
 ]
 
 if settings.DEBUG:
