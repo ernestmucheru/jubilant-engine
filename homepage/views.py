@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from .models import Projects, Ratings
+from .models import Projects, Ratings, Category
 from.forms import RatingForm
 
 
@@ -9,8 +9,8 @@ from.forms import RatingForm
 def index(request):
     context = {}
     projects = Projects.objects.all()
-    # categroies = Category.objects.all()
-    context["projects"] = projects 
+    categories = Category.objects.all()
+    context= {'categories': categories, 'projects': projects }
 
 
     return render(request, 'index.html',context)
@@ -20,16 +20,28 @@ def about(request):
     return render(request, 'about.html')
 
 def upload(request):
-    projects = Projects.objects.all()
-    context = {'projects':projects}
+    categories = Category.objects.all()
+    
 
     if request.method == 'POST':
         data = request.POST
         image = request.FILES.get('image')
 
-        print('data:', data)
-        print('image:', image)
+        if data ['category'] != 'none':
+            category = Category.objects.get(id=data['category'])
+        elif data ['category_new'] != '':
+            category, created = Category.objects.get_or_create(name=data ['category_new'])
+        else:
+            category = None
 
+        project = Projects.objects.create(
+            category=category,
+            description=data['description'],
+            image=image,
+        )
+        return redirect('home')
+
+    context = {'categories': categories}
     return render(request, 'upload.html',context)
 
 def viewProject(request, id):
@@ -65,4 +77,4 @@ def rating(request, id):
         'form' : form,
         "ratings": ratings,
     }
-    return render(request, 'rating.html', context)@login_required
+    return render(request, 'rating.html', context)

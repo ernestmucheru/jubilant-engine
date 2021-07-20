@@ -12,9 +12,9 @@ class Category(models.Model):
 class Projects(models.Model):
     alt = models.CharField(max_length=60)
     title = models.CharField(max_length=100, null=True)
-    image = models.ImageField(upload_to="")
+    image = models.ImageField(upload_to="",null=False, blank=False)
     description = models.TextField()
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.alt
