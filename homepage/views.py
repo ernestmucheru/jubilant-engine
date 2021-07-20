@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .models import Category, Projects
+from .models import Projects
 
 
 # Create your views here.
@@ -9,7 +9,7 @@ def index(request):
     context = {}
     projects = Projects.objects.all()
     # categroies = Category.objects.all()
-    context["projects"] = projects = {'projects': projects}
+    context["projects"] = projects 
 
 
     return render(request, 'index.html',context)
