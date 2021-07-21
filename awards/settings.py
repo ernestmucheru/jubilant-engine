@@ -61,7 +61,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authy',
     'homepage',
-    'star_ratings',
     'bootstrap3',
     'crispy_forms',
     'cloudinary',
