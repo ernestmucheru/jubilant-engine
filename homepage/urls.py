@@ -9,6 +9,8 @@ urlpatterns = [
     path('contact', views.contact, name='contact'),
     path('project/<int:id>/', views.viewProject, name='project'),
     path('upload', views.upload, name='upload'),
+    path('rating/<int:id>/', views.rating, name='rating'),
+    path('searchCategory', views.searchCategory, name='searchCategory'),
 ]
 
 if settings.DEBUG:

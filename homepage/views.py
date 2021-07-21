@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from .models import Projects, Ratings, Category
-from.forms import RatingForm
+from .models import Projects,Category,Rating
+from authy.models import Profile
+from.forms import RateForm
 
 
 
@@ -53,29 +54,66 @@ def contact(request):
 
     return render(request, 'contact.html')
 
-@login_required
 
-def rating(request, id):
-    Project = Projects.objects.get(id=id)
-    user = request.user
-    if request.method == 'POST':
-        form = RatingForm(request.POST)
-        if form.is_valid():
-            rating = Ratings(
-                author = user,
-                project = Project,
-                design_rating = form.cleaned_data["design_rating"],
-                usability_rating = form.cleaned_data["usability_rating"],
-                content_rating = form.cleaned_data["content_rating"],
-                comment = form.cleaned_data["comment"],
-            )
-            rating.save()
+def rating(request,id):
+    user = Profile.objects.get(user= request.user)
+    project = Projects.objects.get(id=id)
+    ratings=Rating.objects.filter(project = project).last()
+    tech_tags = project.technologies.split(",")
+    try:
+        rates = Rating.objects.filter(user=user,project=project).first()
+    except Rating.DoesNotExist:
+        rates=None
+    if rates is None:
+        rates_status=False
     else:
-        form = RatingForm()
-    ratings = Ratings.objects.filter(project=Project).order_by('-created_on')
-    context={
-        'project' : Project,
-        'form' : form,
-        "ratings": ratings,
+        rates_status = True
+    form = RateForm()
+    rating=None
+    if request.method == 'POST':
+        form = RateForm(request.POST)
+        if form.is_valid():
+            rate = form.save(commit=False)
+            rate.user = user
+            rate.project = project
+            rate.save()
+        try:
+            rating = Rating.objects.filter(project_id=id)
+        except Rating.DoesNotExist:
+            rating=None
+        design = form.cleaned_data['design']
+        usability = form.cleaned_data['usability']
+        content = form.cleaned_data['content']
+        rate.average = (design + usability + content)/2
+        rate.save()
+        design_ratings = [d.design for d in rating]
+        design_average = sum(design_ratings) / len(design_ratings)
+        usability_ratings = [us.usability for us in rating]
+        usability_average = sum(usability_ratings) / len(usability_ratings)
+        content_ratings = [content.content for content in rating]
+        content_average = sum(content_ratings) / len(content_ratings)
+        score = (design_average + usability_average + content_average) / 3
+        rate.design_average = round(design_average, 2)
+        rate.usability_average = round(usability_average, 2)
+        rate.content_average = round(content_average, 2)
+        rate.score = round(score, 2)
+        rate.save()
+        return redirect("projects", id=project.id)
+    else:
+        form = RateForm()
+    ctx={
+        "project":project,
+        "ratings":ratings,
+        "form":form,
+        "tech_tags":tech_tags,
+        "rates_status":rates_status
     }
-    return render(request, 'rating.html', context)
+    return render(request,"projects.html",ctx)
+
+def searchCategory(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        category = Category.objects.filter(name__contains=searched)
+        return render(request,"results.html", {"searched":searched, "category":category} )
+    else:
+        return render(request,"results.html", {})

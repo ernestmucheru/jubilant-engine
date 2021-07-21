@@ -21,9 +21,10 @@
             </ul>
         </div>
 
-        <form class="form-inline">
+        <form class="form-inline" method="POST" action="{% url 'searchCategory' %}">
+            {% csrf_token %}
             <div class="md-form my-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+              <input class="form-control mr-sm-2" name="searched" type="text" placeholder="Search Category" aria-label="Search">
             </div>
             <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
         </form>

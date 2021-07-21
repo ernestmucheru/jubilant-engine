@@ -1,7 +1,7 @@
 from django import forms
+from .models import Rating
 
-class RatingForm(forms.Form):
-    design_rating = forms.IntegerField()
-    usability_rating = forms.IntegerField()
-    content_rating = forms.IntegerField()
-    comment = forms.CharField(widget=forms.Textarea(attrs={"class": "form-control","placeholder": "Leave a comment"}))
+class RateForm(forms.ModelForm):
+    class Meta:
+        model = Rating
+        fields=['design','content','usability']

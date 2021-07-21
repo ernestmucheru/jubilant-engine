@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from cloudinary.models import CloudinaryField
+from authy.models import Profile
 # Create your models here.
 
 class Category(models.Model):
@@ -20,13 +21,40 @@ class Projects(models.Model):
     def __str__(self):
         return self.alt
 
-class Ratings(models.Model):
-    project = models.ForeignKey(Projects, on_delete=models.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    design_rating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    usability_rating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    content_rating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    comment = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
+
+
+class Rating(models.Model):
+    rating = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+        (6, '6'),
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10, '10'),
+    )
+    design = models.IntegerField(choices=rating, default=0, blank=True)
+    usability = models.IntegerField(choices=rating, blank=True)
+    content = models.IntegerField(choices=rating, blank=True)
+    score = models.FloatField(default=0, blank=True)
+    design_average = models.FloatField(default=0, blank=True)
+    usability_average = models.FloatField(default=0, blank=True)
+    content_average = models.FloatField(default=0, blank=True)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, related_name='rater')
+    project = models.ForeignKey(Projects, on_delete=models.CASCADE, related_name='ratings', null=True)
+    rated_at=models.DateTimeField(auto_now_add=True)
+    def save_rating(self):
+        self.save()
+    
+    def delete_rating(self):
+        self.delete()
+    @classmethod
+    def get_project_rating(cls, pk):
+        rating = Rating.objects.filter(project_id=pk).all()
+        return rating
     def __str__(self):
-        return self.author
+        return f'{self.project} Rating'
+

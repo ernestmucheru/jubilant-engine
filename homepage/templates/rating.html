@@ -1,0 +1,68 @@
+{% block content %}
+{% load crispy_forms_tags %}
+{%load static%}
+{%load bootstrap3%}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{{project.title}}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+</head>
+
+<body class="m-5">
+
+    <div class="container ">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+
+                <!-- <div class="col-md-5">
+
+                    <a href="{%url 'home'%}" class="btn btn-primary my-3 "> Go Back</a>
+                    <div style="height: 90vh">
+                        <img style="max-width: 100%; max-height: 100%; margin-top: 20px;" src="{{project.image.url}}"
+                            alt="">
+
+                    </div>
+
+                </div> -->
+
+
+
+                    <div class="card" style="width: 18rem;">
+                        <div class="form-wrapper mb-5">
+                            {% if rates_status%}
+
+                            <p class="m-4 text-center h4">You have already voted</p>
+                            {%else%}
+                            <div class="form">
+                                <p class="text-center h3">Rate Project</p>
+                                <form action="{%url 'project' project.id %}" method="post"
+                                    enctype="multipart/form-data">
+                                    {%csrf_token%} {% bootstrap_form form %}
+                                    <input type="submit" class="btn btn-success" value="Vote" />
+                                </form>
+                            </div>
+
+                            {% endif %}
+
+                            <!-- <p>Location: {{photo.location}}</p> -->
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endblock%}
+
+</body>
+
+</html>
